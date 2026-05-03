@@ -36,7 +36,7 @@ export function WeddingDetailsForm({ initial, onBack, onNext }: Props) {
       <Header step={1} title="Wedding details" />
       <div className="mt-8 space-y-5">
         <Field
-          label="Partner 1 name"
+          label="Bride's name"
           required
           error={showErrors && !partner1.trim() ? "Required" : undefined}
         >
@@ -49,7 +49,7 @@ export function WeddingDetailsForm({ initial, onBack, onNext }: Props) {
           />
         </Field>
         <Field
-          label="Partner 2 name"
+          label="Groom's name"
           required
           error={showErrors && !partner2.trim() ? "Required" : undefined}
         >

@@ -178,7 +178,7 @@ export const SECTION_TITLES: Record<QuestionSection, string> = {
 };
 
 export function fill(template: string, p1: string, p2: string): string {
-  return template.replaceAll("{p1}", p1 || "Partner 1").replaceAll("{p2}", p2 || "Partner 2");
+  return template.replaceAll("{p1}", p1 || "Bride").replaceAll("{p2}", p2 || "Groom");
 }
 
 export const GRID_SIZE = 16;

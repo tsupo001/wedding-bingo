@@ -86,24 +86,33 @@ export function PlayMode({
   };
 
   const markedCount = Object.values(marks).filter(Boolean).length;
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="mx-auto max-w-lg px-5 py-10 pb-32">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="font-serif text-xs uppercase tracking-[0.3em] text-gold">
-            Now playing
-          </p>
-          <h2 className="mt-2 font-serif text-3xl text-ink sm:text-4xl">
-            Tap squares as they happen
-          </h2>
-          <p className="mt-2 text-sm text-ink/70">
-            {markedCount} marked · get four in a row for bingo
-          </p>
-        </div>
+    <div className="mx-auto max-w-2xl pb-4">
+      {/* Slim top bar — back + counter */}
+      <div className="flex items-center justify-between px-3 pt-3 pb-2">
+        <button
+          onClick={onBack}
+          className="rounded-full px-2 py-1 text-sm text-ink/70 hover:text-ink"
+          aria-label="Back to card preview"
+        >
+          ← Back
+        </button>
+        <span className="text-xs uppercase tracking-[0.2em] text-ink/60">
+          {markedCount} marked
+        </span>
+        <button
+          onClick={() => setMenuOpen((v) => !v)}
+          className="rounded-full px-3 py-1 text-sm text-ink/70 hover:text-ink"
+          aria-label="More actions"
+        >
+          {menuOpen ? "Close" : "Menu"}
+        </button>
       </div>
 
-      <div className="mt-6 rounded-xl border border-ink/15 bg-white/60 p-3 shadow-sm">
+      {/* Card — full bleed on mobile, no chrome */}
+      <div className="px-1 sm:px-3">
         <BingoCard
           details={details}
           questions={questions}
@@ -113,36 +122,33 @@ export function PlayMode({
         />
       </div>
 
-      <div className="mt-6 flex flex-col gap-3">
-        <button
-          onClick={handleDownload}
-          disabled={downloading}
-          className="w-full rounded-full border border-ink/30 bg-white/60 py-2.5 font-serif text-base text-ink transition hover:bg-white disabled:opacity-60"
-        >
-          {downloading ? "Generating…" : "Download progress as PNG"}
-        </button>
-        <div className="flex gap-3">
+      {/* Collapsible menu */}
+      {menuOpen && (
+        <div className="mx-3 mt-3 rounded-xl border border-ink/15 bg-white/70 p-3 shadow-sm">
           <button
-            onClick={clearAll}
-            disabled={markedCount === 0}
-            className="flex-1 rounded-full border border-ink/25 bg-white/40 py-2.5 text-sm text-ink transition hover:bg-white disabled:opacity-40"
+            onClick={handleDownload}
+            disabled={downloading}
+            className="w-full rounded-full border border-ink/25 bg-white py-2 text-sm text-ink transition hover:bg-cream disabled:opacity-60"
           >
-            Clear marks
+            {downloading ? "Generating…" : "Download progress as PNG"}
           </button>
-          <button
-            onClick={onBack}
-            className="flex-1 rounded-full border border-ink/25 bg-white/40 py-2.5 text-sm text-ink transition hover:bg-white"
-          >
-            Back to card
-          </button>
+          <div className="mt-2 flex gap-2">
+            <button
+              onClick={clearAll}
+              disabled={markedCount === 0}
+              className="flex-1 rounded-full border border-ink/25 bg-white/60 py-2 text-sm text-ink transition hover:bg-white disabled:opacity-40"
+            >
+              Clear marks
+            </button>
+            <button
+              onClick={onReset}
+              className="flex-1 rounded-full border border-ink/25 bg-white/60 py-2 text-sm text-ink transition hover:bg-white"
+            >
+              Start over
+            </button>
+          </div>
         </div>
-        <button
-          onClick={onReset}
-          className="text-center text-xs text-ink/50 hover:text-ink/80"
-        >
-          Start over
-        </button>
-      </div>
+      )}
 
       {banner && (
         <div

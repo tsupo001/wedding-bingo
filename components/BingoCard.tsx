@@ -98,8 +98,8 @@ function CardInner({
   details: WeddingDetails;
 }) {
   const dateLabel = formatWeddingDate(details.date);
-  const couple = `${details.partner1 || "Partner 1"} & ${
-    details.partner2 || "Partner 2"
+  const couple = `${details.partner1 || "Bride"} & ${
+    details.partner2 || "Groom"
   }`;
   const guestLine = details.guest ? `${details.guest}'s card` : "";
 
@@ -266,13 +266,13 @@ function Cell({
           fontSize: labelFontSize(label),
           textTransform: "uppercase",
           letterSpacing: 1.4,
-          color: marked ? "#7a6440" : "#b89868",
+          color: marked ? "#5d4a2a" : "#a07d4f",
           lineHeight: 1.2,
-          minHeight: 44,
+          minHeight: 50,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontWeight: 600,
+          fontWeight: 700,
         }}
       >
         {label}
@@ -289,10 +289,7 @@ function Cell({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          opacity: marked ? 0.55 : 1,
-          textDecoration: marked ? "line-through" : "none",
-          textDecorationColor: "#7a6440",
-          textDecorationThickness: 2,
+          fontWeight: marked ? 600 : 500,
         }}
       >
         {answer}
@@ -304,8 +301,8 @@ function Cell({
             position: "absolute",
             top: 10,
             right: 12,
-            width: 36,
-            height: 36,
+            width: 44,
+            height: 44,
             borderRadius: 999,
             background: "#b89868",
             color: "#faf6ef",
@@ -313,9 +310,10 @@ function Cell({
             alignItems: "center",
             justifyContent: "center",
             fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: 22,
+            fontSize: 28,
             fontWeight: 700,
             lineHeight: 1,
+            boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
           }}
         >
           ✓
@@ -327,18 +325,18 @@ function Cell({
 
 function answerFontSize(text: string): number {
   const len = text.length;
-  if (len <= 4) return 56;
-  if (len <= 8) return 46;
-  if (len <= 14) return 38;
-  if (len <= 20) return 30;
-  if (len <= 28) return 26;
-  return 22;
+  if (len <= 4) return 64;
+  if (len <= 8) return 54;
+  if (len <= 14) return 44;
+  if (len <= 20) return 36;
+  if (len <= 28) return 30;
+  return 24;
 }
 
 function labelFontSize(text: string): number {
   const len = text.length;
-  if (len <= 14) return 18;
-  if (len <= 22) return 16;
-  if (len <= 30) return 14;
-  return 12;
+  if (len <= 12) return 22;
+  if (len <= 20) return 19;
+  if (len <= 28) return 16;
+  return 14;
 }
